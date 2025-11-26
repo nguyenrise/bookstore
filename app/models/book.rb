@@ -3,5 +3,9 @@ class Book < ApplicationRecord
     [ "author", "created_at", "description", "id", "id_value", "price", "stock_quantity", "title", "updated_at" ]
   end
 
+  def self.ransackable_associations(auth_object = nil)
+    ["image_attachment", "image_blob"]
+  end
+
   has_one_attached :image
 end
