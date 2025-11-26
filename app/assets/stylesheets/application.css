@@ -308,3 +308,8 @@ form {
   background-color: #dc3545; /* Red */
   color: white;
 }
+
+.checkout-button {
+  text-align: right;
+  margin-top: 1rem;
+}

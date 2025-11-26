@@ -4,11 +4,12 @@ class Book < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    [ "image_attachment", "image_blob", "cart_items", "categorizations", "categories" ]
+    [ "image_attachment", "image_blob", "cart_items", "categorizations", "categories", "order_items" ]
   end
 
   has_one_attached :image
   has_many :cart_items, dependent: :destroy
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
+  has_many :order_items
 end
