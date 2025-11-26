@@ -13,8 +13,8 @@ class Book < ApplicationRecord
   has_many :categories, through: :categorizations
   has_many :order_items
 
-  scope :newly_added, -> { where('created_at >= ?', 3.days.ago) }
-  scope :recently_updated, -> { where('updated_at >= ?', 3.days.ago).where.not(id: newly_added) }
+  scope :newly_added, -> { where("created_at >= ?", 3.days.ago) }
+  scope :recently_updated, -> { where("updated_at >= ?", 3.days.ago).where.not(id: newly_added) }
 
   validates :title, presence: true
   validates :author, presence: true
