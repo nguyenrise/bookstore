@@ -1,0 +1,7 @@
+<h1><%= @book.title %></h1>
+<p><strong>Author:</strong> <%= @book.author %></p>
+<p><strong>Price:</strong> <%= number_to_currency(@book.price) %></p>
+<p><strong>Description:</strong> <%= @book.description %></p>
+<p><strong>Stock:</strong> <%= @book.stock_quantity %></p>
+
+<%= link_to "Back to all books", books_path %>
