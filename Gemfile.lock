@@ -423,6 +423,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  kaminari
   puma (>= 5.0)
   rails (~> 8.0.4)
   rubocop-rails-omakase

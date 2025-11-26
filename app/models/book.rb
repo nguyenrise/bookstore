@@ -12,4 +12,12 @@ class Book < ApplicationRecord
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations
   has_many :order_items
+
+  scope :newly_added, -> { where('created_at >= ?', 3.days.ago) }
+  scope :recently_updated, -> { where('updated_at >= ?', 3.days.ago).where.not(id: newly_added) }
+
+  validates :title, presence: true
+  validates :author, presence: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :stock_quantity, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 end

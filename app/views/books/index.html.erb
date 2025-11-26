@@ -2,11 +2,20 @@
 
 <%= form_with(url: books_path, method: :get, local: true) do |form| %>
   <div class="search-bar">
-    <%= form.text_field :query, placeholder: "Search by title or author...", value: params[:query] %>
+    <%= form.text_field :query, placeholder: "Search by title, author, or description...", value: params[:query] %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: 'All Categories' }, { value: params[:category_id] } %>
     <%= form.submit "Search" %>
   </div>
 <% end %>
 
+<div class="filter-links">
+  <%= link_to "All", books_path %>
+  <%= link_to "New", books_path(filter: "new") %>
+  <%= link_to "Recently Updated", books_path(filter: "recently_updated") %>
+</div>
+
 <div class="book-grid">
   <%= render @books %>
 </div>
+
+<%= paginate @books %>
