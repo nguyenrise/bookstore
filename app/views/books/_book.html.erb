@@ -1,7 +1,17 @@
-<div>
-  <h2><%= link_to book.title, book %></h2>
-  <p><%= book.author %></p>
-  <p><%= number_to_currency(book.price) %></p>
-  <%= button_to "Add to Cart", cart_items_path(book_id: book.id) %>
+<div class="book-card">
+  <%= link_to book do %>
+    <% if book.image.attached? %>
+      <%= image_tag book.image %>
+    <% else %>
+      <div class="placeholder-image">No Image</div>
+    <% end %>
+  <% end %>
+  <div class="book-card-content">
+    <h3><%= link_to book.title, book %></h3>
+    <p class="author"><%= book.author %></p>
+    <p class="price"><%= number_to_currency(book.price) %></p>
+    <%= button_to "Add to Cart", cart_items_path(book_id: book.id), class: 'button' %>
+  </div>
 </div>
+
 

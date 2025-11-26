@@ -1,12 +1,20 @@
-<h1><%= @book.title %></h1>
-<p><strong>Author:</strong> <%= @book.author %></p>
-<p><strong>Price:</strong> <%= number_to_currency(@book.price) %></p>
-<p><strong>Description:</strong> <%= @book.description %></p>
-<p><strong>Stock:</strong> <%= @book.stock_quantity %></p>
+<div class="book-detail">
+  <div class="book-image">
+    <% if @book.image.attached? %>
+      <%= image_tag @book.image %>
+    <% else %>
+      <div class="placeholder-image">No Image</div>
+    <% end %>
+  </div>
+  <div class="book-detail-info">
+    <h1><%= @book.title %></h1>
+    <p class="author">by <%= @book.author %></p>
+    <p class="price"><%= number_to_currency(@book.price) %></p>
+    <p><strong>Description:</strong> <%= @book.description %></p>
+    <p><strong>Stock:</strong> <%= @book.stock_quantity %></p>
+    <%= button_to "Add to Cart", cart_items_path(book_id: @book.id), class: 'button' %>
+    <br>
+    <%= link_to "Back to all books", books_path %>
+  </div>
+</div>
 
-<% if @book.image.attached? %>
-  <p><%= image_tag @book.image, style: "width: 200px;" %></p>
-<% end %>
-
-<%= link_to "Back to all books", books_path %>
-<%= button_to "Add to Cart", cart_items_path(book_id: @book.id) %>

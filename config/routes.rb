@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :books, only: [ :index, :show ]
-  resources :categories, only: [:index, :show]
+  resources :categories, only: [ :index, :show ]
   root "books#index"
   resource :cart, only: [ :show ]
   resources :cart_items, only: [ :create ]

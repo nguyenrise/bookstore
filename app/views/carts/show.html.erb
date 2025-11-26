@@ -1,27 +1,24 @@
-<h1>Your Cart</h1>
+<div class="cart-container">
+  <h1>Your Cart</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Book</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total</th>
-    </tr>
-  </thead>
-  <tbody>
+  <% if @cart.cart_items.empty? %>
+    <p>Your cart is empty.</p>
+  <% else %>
     <% @cart.cart_items.each do |item| %>
-      <tr>
-        <td><%= item.book.title %></td>
-        <td><%= number_to_currency(item.book.price) %></td>
-        <td><%= item.quantity %></td>
-        <td><%= number_to_currency(item.book.price * item.quantity) %></td>
-      </tr>
+      <div class="cart-item">
+        <div>
+          <strong><%= item.book.title %></strong>
+          <p><%= number_to_currency(item.book.price) %> x <%= item.quantity %></p>
+        </div>
+        <div>
+          <strong><%= number_to_currency(item.book.price * item.quantity) %></strong>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+    <div class="cart-total">
+      Total: <%= number_to_currency(@cart.cart_items.sum { |item| item.book.price * item.quantity }) %>
+    </div>
+  <% end %>
+</div>
 
-<h2>
-  Total: <%= number_to_currency(@cart.cart_items.sum { |item| item.book.price * item.quantity }) %>
-</h2>
 
