@@ -160,6 +160,7 @@ form {
 
 .book-card-content {
   padding: 1rem;
+  padding-bottom: 24px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
