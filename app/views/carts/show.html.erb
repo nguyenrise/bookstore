@@ -6,12 +6,21 @@
   <% else %>
     <% @cart.cart_items.each do |item| %>
       <div class="cart-item">
-        <div>
+        <div class="cart-item-info">
           <strong><%= item.book.title %></strong>
           <p><%= number_to_currency(item.book.price) %> x <%= item.quantity %></p>
         </div>
-        <div>
-          <strong><%= number_to_currency(item.book.price * item.quantity) %></strong>
+        <div class="cart-item-details">
+          <div class="cart-item-actions">
+            <%= form_with(model: item, url: cart_item_path(item), method: :patch, class: 'update-quantity-form') do |f| %>
+              <%= f.number_field :quantity, min: 1, class: 'quantity-input', value: item.quantity %>
+              <%= f.submit "Update", class: 'button' %>
+            <% end %>
+            <%= button_to "Remove", cart_item_path(item), method: :delete, class: 'button-secondary' %>
+          </div>
+          <div class="cart-item-total">
+            <strong><%= number_to_currency(item.book.price * item.quantity) %></strong>
+          </div>
         </div>
       </div>
     <% end %>
