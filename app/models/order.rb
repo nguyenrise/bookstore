@@ -3,6 +3,9 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items
 
+  validates :address, presence: true
+  validates :phone_number, presence: true
+
   def self.ransackable_attributes(auth_object = nil)
     [ "created_at", "id", "total", "updated_at", "user_id", "status", "address", "phone_number" ]
   end

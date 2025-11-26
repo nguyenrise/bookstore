@@ -1,6 +1,18 @@
 <h1>Checkout</h1>
 
 <%= form_with(model: @order, url: orders_path, method: :post) do |form| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2>Please correct the following issues to complete your order:</h2>
+
+      <ul>
+        <% @order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label :address %>
     <%= form.text_field :address, value: current_user.address %>
