@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "sprockets-rails", "~> 3.5"
+
+gem "sassc-rails", "~> 2.1"
