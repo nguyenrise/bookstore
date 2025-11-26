@@ -89,6 +89,7 @@ nav a:hover, nav a.active {
 
 .button-secondary {
     background-color: var(--secondary-color);
+    border: none;
 }
 .button-secondary:hover {
     background-color: #3a3a3a;
@@ -167,6 +168,16 @@ form {
 .book-card-content h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
+}
+
+.book-card-content h3 a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+.book-card-content h3 a:hover {
+  color: #2563eb; /* Darker blue */
 }
 
 .book-card-content .author {
