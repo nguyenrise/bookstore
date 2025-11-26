@@ -19,3 +19,4 @@ Book.destroy_all
     stock_quantity: Faker::Number.between(from: 1, to: 100)
   )
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
