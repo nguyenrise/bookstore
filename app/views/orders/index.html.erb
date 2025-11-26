@@ -1,0 +1,38 @@
+<h1>My Orders</h1>
+
+<div class="orders-container">
+  <% @orders.each do |order| %>
+    <div class="order-card">
+      <div class="order-header">
+        <h2>Order #<%= order.id %></h2>
+        <p class="order-date"><%= time_ago_in_words(order.created_at) %> ago</p>
+      </div>
+      <div class="order-body">
+        <table class="order-items-table">
+          <thead>
+            <tr>
+              <th>Book</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.order_items.each do |item| %>
+              <tr>
+                <td><%= item.book.title %></td>
+                <td><%= item.quantity %></td>
+                <td><%= number_to_currency(item.price) %></td>
+                <td><%= number_to_currency(item.price * item.quantity) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="order-footer">
+        <p class="order-total">Order Total: <%= number_to_currency(order.total) %></p>
+        <p class="order-status">Status: <%= order.status %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

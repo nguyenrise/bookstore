@@ -1,18 +1,37 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @orders = current_user.orders.includes(order_items: :book).order(created_at: :desc)
+  end
+
   def create
-    @order = current_user.orders.build
-    @order.total = @cart.cart_items.sum { |item| item.book.price * item.quantity }
+    @order = Order.new(order_params)
+    @order.user = current_user
+    @order.total = @cart.total_price
 
     if @order.save
+      # Save address and phone number to user if they don't have one
+      current_user.update(address: @order.address, phone_number: @order.phone_number) if current_user.address.blank?
+
       @cart.cart_items.each do |item|
         @order.order_items.create(book: item.book, quantity: item.quantity, price: item.book.price)
       end
+
       @cart.cart_items.destroy_all
-      redirect_to root_path, notice: "Order was successfully created."
+      redirect_to root_path, notice: 'Order was successfully placed.'
     else
-      redirect_to cart_path, alert: "There was an error creating your order."
+      render :new
     end
+  end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:address, :phone_number)
+  end
+
+  def new
+    @order = Order.new
   end
 end
