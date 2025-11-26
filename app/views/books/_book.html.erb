@@ -1,0 +1,7 @@
+<div>
+  <h2><%= link_to book.title, book %></h2>
+  <p><%= book.author %></p>
+  <p><%= number_to_currency(book.price) %></p>
+  <%= button_to "Add to Cart", cart_items_path(book_id: book.id) %>
+</div>
+

@@ -1,0 +1,8 @@
+<h1><%= @category.name %></h1>
+
+<div class="books">
+  <% @books.each do |book| %>
+    <%= render 'books/book', book: book %>
+  <% end %>
+</div>
+
