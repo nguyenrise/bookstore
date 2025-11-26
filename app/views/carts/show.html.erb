@@ -1,0 +1,27 @@
+<h1>Your Cart</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Book</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.cart_items.each do |item| %>
+      <tr>
+        <td><%= item.book.title %></td>
+        <td><%= number_to_currency(item.book.price) %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.book.price * item.quantity) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>
+  Total: <%= number_to_currency(@cart.cart_items.sum { |item| item.book.price * item.quantity }) %>
+</h2>
+

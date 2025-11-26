@@ -9,3 +9,4 @@
 <% end %>
 
 <%= link_to "Back to all books", books_path %>
+<%= button_to "Add to Cart", cart_items_path(book_id: @book.id) %>

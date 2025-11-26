@@ -4,6 +4,7 @@
   <% @books.each do |book| %>
     <li>
       <%= link_to book.title, book_path(book) %>
+      <%= button_to "Add to Cart", cart_items_path(book_id: book.id) %>
     </li>
   <% end %>
 </ul>
