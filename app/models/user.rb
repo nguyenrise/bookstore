@@ -8,6 +8,6 @@ class User < ApplicationRecord
   has_many :orders
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "email", "id", "updated_at", "address", "phone_number"]
+    [ "created_at", "email", "id", "updated_at", "address", "phone_number" ]
   end
 end

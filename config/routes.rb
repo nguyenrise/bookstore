@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :orders, only: [:new, :create, :index]
+  resources :orders, only: [ :new, :create, :index ]
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

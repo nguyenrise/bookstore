@@ -1,8 +1,14 @@
 class OrdersController < ApplicationController
+  include CurrentCart
   before_action :authenticate_user!
+  before_action :set_cart, only: [ :create ]
 
   def index
     @orders = current_user.orders.includes(order_items: :book).order(created_at: :desc)
+  end
+
+  def new
+    @order = current_user.orders.build
   end
 
   def create
@@ -19,7 +25,7 @@ class OrdersController < ApplicationController
       end
 
       @cart.cart_items.destroy_all
-      redirect_to root_path, notice: 'Order was successfully placed.'
+      redirect_to root_path, notice: "Order was successfully placed."
     else
       render :new
     end
@@ -29,9 +35,5 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:address, :phone_number)
-  end
-
-  def new
-    @order = Order.new
   end
 end

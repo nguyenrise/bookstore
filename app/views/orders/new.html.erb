@@ -3,7 +3,7 @@
 <%= form_with(model: @order, url: orders_path, method: :post) do |form| %>
   <div class="field">
     <%= form.label :address %>
-    <%= form.text_area :address, value: current_user.address %>
+    <%= form.text_field :address, value: current_user.address %>
   </div>
 
   <div class="field">
